@@ -340,7 +340,9 @@ namespace pbrt {
                                  idx.y < 0 ? -1 : indexRemap[idx.y],
                                  idx.z < 0 ? -1 : indexRemap[idx.z],
                                  idx.w < 0 ? -1 : indexRemap[idx.w]));
+#ifdef NDEBUG
     std::cout << "#pbrt:semantic: done remapping quad mesh. #verts: " << in->vertex.size() << " -> " << out->vertex.size() << std::endl;
+#endif
     return out;
   }
     

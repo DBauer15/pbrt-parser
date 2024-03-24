@@ -211,8 +211,7 @@ namespace pbrt {
           if (includedFileName[0] != '/') {
             includedFileName = rootNamePath+"/"+includedFileName;
           }
-          // if (dbg)
-          std::cout << "... including spd file '" << includedFileName << " ..." << std::endl;
+          if (dbg) std::cout << "... including spd file '" << includedFileName << " ..." << std::endl;
           FileType::SP file = std::make_shared<FileType>(includedFileName);
           auto tokens = std::make_shared<BasicLexer<FileType>>(file);
           Token t = tokens->next();
@@ -376,7 +375,9 @@ namespace pbrt {
       }
       if (token == "ActiveTransform") {
         std::string time = next().text;
+#ifdef NDEBUG
         std::cout << "'ActiveTransform' not implemented" << std::endl;
+#endif
         return true;
       }
       if (token == "Identity") {
@@ -393,7 +394,9 @@ namespace pbrt {
       }
       if (token == "CoordSysTransform") {
         Token nameOfObject = next();
+#ifdef NDEBUG
         std::cout << "ignoring 'CoordSysTransform'" << std::endl;
+#endif
         return true;
       }
       return false;
@@ -680,8 +683,7 @@ namespace pbrt {
           if (includedFileName[0] != '/') {
             includedFileName = rootNamePath+"/"+includedFileName;
           }
-          // if (dbg)
-          std::cout << "... including file '" << includedFileName << " ..." << std::endl;
+          if (dbg) std::cout << "... including file '" << includedFileName << " ..." << std::endl;
         
           tokenizerStack.push(tokens);
           FileType::SP file = std::make_shared<FileType>(includedFileName);

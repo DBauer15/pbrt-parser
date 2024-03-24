@@ -5,7 +5,9 @@ namespace pbrt {
 void createPixelFilter(Scene::SP ours, pbrt::syntactic::Scene::SP pbrt) 
 {
     if (!pbrt->pixelFilter) {
+#ifdef NDEBUG
         std::cout << "pbrt-parser: pixel filter is missing\n";
+#endif
         return;
     }
 
@@ -24,10 +26,12 @@ void createPixelFilter(Scene::SP ours, pbrt::syntactic::Scene::SP pbrt)
         ours->pixelFilter->type = PixelFilter::Type::triangle;
         ours->pixelFilter->radius = pbrt->pixelFilter->getParam1f("xwidth", 2.f);
     }
+#ifdef NDEBUG
     else {
         std::cout << "pbrt-parser: unsupported pixel filter type: " + pbrt->pixelFilter->type + "\n";
         assert(false);
     }
+#endif
 }
 
 } // namespace pbrt

@@ -6,7 +6,9 @@ namespace pbrt {
 void createSampler(Scene::SP ours, pbrt::syntactic::Scene::SP pbrt)
 {
     if (!pbrt->sampler) {
+#ifdef NDEBUG
         std::cout << "pbrt-parser: sampler is missing\n";
+#endif
         return;
     }
 
@@ -42,9 +44,11 @@ void createSampler(Scene::SP ours, pbrt::syntactic::Scene::SP pbrt)
         ours->sampler->ySamples = k;
         ours->sampler->pixelSamples = k*k;
     }
+#ifdef NDEBUG
     else {
         std::cout << "pbrt-parser: unsupported sampler type: " + pbrt->sampler->type + "\n";
     }
+#endif
 }
 
 } // namespace pbrt

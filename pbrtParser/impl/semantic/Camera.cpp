@@ -33,7 +33,9 @@ namespace pbrt {
       resolution.y = pbrt->film->findParam<int>("yresolution")->get(0);
       ours->film = std::make_shared<Film>(resolution,fileName);
     } else {
+#ifdef NDEBUG
       std::cout << "warning: could not determine film resolution from pbrt scene" << std::endl;
+#endif
     }
   }
 
@@ -53,7 +55,9 @@ namespace pbrt {
   {
     Camera::SP ours = std::make_shared<Camera>();
     if (pbrt->cameras.empty()) {
+#ifdef NDEBUG
       std::cout << "warning: no 'camera'(s) in pbrt file" << std::endl;
+#endif
       return;
     }
 

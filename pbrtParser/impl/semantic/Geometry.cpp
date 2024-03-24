@@ -388,7 +388,9 @@ namespace pbrt {
         diffuse->nSamples = in->getParam1i("nsamples", 1);
         return diffuse;
       } else {
+#ifdef NDEBUG
         std::cout << "Warning: diffuse area light, but no 'L' parameter, or L is neither two (blackbody) nor three (rgba) floats?! Ignoring." << std::endl;
+#endif
         return AreaLight::SP();
       }
       // auto L_it = in->param.find("L");
@@ -412,8 +414,9 @@ namespace pbrt {
       // }
       
     }
-
+#ifdef NDEBUG
     std::cout << "Warning: unknown area light type '" << in->type << "'." << std::endl;
+#endif
     return AreaLight::SP();
   }
   
@@ -437,7 +440,9 @@ namespace pbrt {
         //           << " area light sources..." << std::endl;
         auto &areaLights = pbrtShape->attributes->areaLightSources;
         if (areaLights.size() > 1)
+#ifdef NDEBUG
           std::cout << "Warning: Shape has more than one area light!?" << std::endl;
+#endif
         newShape->areaLight = parseAreaLight(areaLights[0]);
       }
     }
@@ -462,9 +467,11 @@ namespace pbrt {
       LightSource::SP ourLightSource = findOrCreateLightSource(lightSource);
       if (ourLightSource)
         ourObject->lightSources.push_back(ourLightSource);
+#ifdef NDEBUG
       else
         std::cout << "***warning***: could ont parse light source '" << lightSource->toString() << "'"
                   << std::endl;
+#endif
     }
 
     for (auto shape : pbrtObject->shapes) {
@@ -476,9 +483,11 @@ namespace pbrt {
     for (auto instance : pbrtObject->objectInstances)
       ourObject->instances.push_back(emitInstance(instance));
 
+#ifdef NDEBUG
     std::cout << "created object w/ " << ourObject->shapes.size() << " shapes, "
               << ourObject->instances.size() << " instances, and "
               << ourObject->lightSources.size() << " light sources" << std::endl;
+#endif
     return ourObject;
   }
 
