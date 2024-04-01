@@ -63,6 +63,7 @@ if (NOT WIN32)
     CXX_VISIBILITY_PRESET hidden
     CXX_STANDARD 11
     CXX_STANDARD_REQUIRED ON
+    POSITION_INDEPENDENT_CODE ON
   )
 
   target_compile_definitions(pbrtParser_shared PUBLIC PBRT_PARSER_DLL_INTERFACE)
@@ -85,11 +86,12 @@ add_library(pbrtParser STATIC
 )
 
 #set_target_properties(pbrtParser PROPERTIES VERSION ${pbrtParser_VERSION})
-#set_target_properties(pbrtParser PROPERTIES
+set_target_properties(pbrtParser PROPERTIES
 #  VERSION ${pbrtParser_VERSION}
-#  CXX_STANDARD 11
-#  CXX_STANDARD_REQUIRED ON
-#)
+  CXX_STANDARD 11
+  CXX_STANDARD_REQUIRED ON
+  POSITION_INDEPENDENT_CODE ON
+)
 
 target_include_directories(pbrtParser PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
