@@ -375,7 +375,7 @@ namespace pbrt {
       }
       if (token == "ActiveTransform") {
         std::string time = next().text;
-#ifdef NDEBUG
+#ifndef NDEBUG
         std::cout << "'ActiveTransform' not implemented" << std::endl;
 #endif
         return true;
@@ -394,7 +394,7 @@ namespace pbrt {
       }
       if (token == "CoordSysTransform") {
         Token nameOfObject = next();
-#ifdef NDEBUG
+#ifndef NDEBUG
         std::cout << "ignoring 'CoordSysTransform'" << std::endl;
 #endif
         return true;

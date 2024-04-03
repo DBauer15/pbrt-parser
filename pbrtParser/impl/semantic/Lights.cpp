@@ -57,7 +57,7 @@ namespace pbrt {
       throw std::runtime_error("unknown 'infinite' light source param '"+name+"'");
     }
 
-#ifdef NDEBUG
+#ifndef NDEBUG
     std::cout << "found infinite light source w/ map " << light->mapName << std::endl;
 #endif
     return light;

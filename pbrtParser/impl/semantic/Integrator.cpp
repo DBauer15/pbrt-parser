@@ -5,7 +5,7 @@ namespace pbrt {
 void createIntegrator(Scene::SP ours, pbrt::syntactic::Scene::SP pbrt) 
 {
     if (!pbrt->integrator) {
-#ifdef NDEBUG
+#ifndef NDEBUG
         std::cout << "pbrt-parser: integrator is missing\n";
 #endif
         return;
@@ -21,7 +21,7 @@ void createIntegrator(Scene::SP ours, pbrt::syntactic::Scene::SP pbrt)
         ours->integrator->type = Integrator::Type::path_tracer;
         ours->integrator->maxDepth = pbrt->integrator->getParam1i("maxdepth", 5);
     }
-#ifdef NDEBUG
+#ifndef NDEBUG
     else {
         std::cout << "pbrt-parser: unsupported integrator type: " + pbrt->sampler->type + "\n";
     }
